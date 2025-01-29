@@ -2,12 +2,9 @@ version: '3.8'
 
 services:
   frontend:
-    image: 029054246266.dkr.ecr.us-east-1.amazonaws.com/owntrack-frontend:latest
+    image: 029054246266.dkr.ecr.us-east-1.amazonaws.com/owntrack-frontend:nginx-fix
     ports:
-      - "80:80"
-    environment:
-      - SERVER_HOST=recorder
-      - SERVER_PORT=8083
+      - "8080:80"
     depends_on:
       - recorder
     networks:
