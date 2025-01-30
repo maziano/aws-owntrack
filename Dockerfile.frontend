@@ -1,2 +1,11 @@
-FROM 029054246266.dkr.ecr.us-east-1.amazonaws.com/owntrack-frontend:latest
+# Build stage
+FROM node:18 as builder
+WORKDIR /app
+RUN git clone https://github.com/owntracks/frontend.git .
+RUN npm install
+RUN npm run build
+
+# Production stage
+FROM nginx:alpine
+COPY --from=builder /app/dist/ /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/conf.d/default.conf
